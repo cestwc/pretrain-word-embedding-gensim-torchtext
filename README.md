@@ -66,14 +66,15 @@ train_data, valid_data = train_data.split()
 import random
 
 train_data, valid_data = train_data.split(random_state = random.seed(SEED))
-
-
+```
+We pretrain our embeddings here
+```python
 from pretrain import wv
 import torchtext.vocab as vocab
 
 emb_name = wv((your_path + 'your-data-train.json', ['your_column_name', 'another_column_name']), size = 4, window = 3, min_count = 2, workers = 4, iter = 10)
-
-
+```
+```python
 MAX_VOCAB_SIZE = 25_000
 
 SRC.build_vocab(train_data, 
@@ -90,6 +91,12 @@ TRG.build_vocab(train_data,
 then test it
 ```python
 print(SRC.vocab.vectors.shape)
+```
+
+In case you would like to see the progress of word embedding pretraining, just add this piece of code in front.
+```python
+import logging
+logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', level=logging.DEBUG, datefmt='%I:%M:%S')
 ```
 
 ## Benchmark the word embeddings
