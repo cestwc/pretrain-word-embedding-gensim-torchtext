@@ -59,4 +59,4 @@ def wv(*datasets, directory = 'emb.txt', clean_text = False, tokenizer = None, t
 	
 	model.wv.save_word2vec_format(directory)
 	
-	return model
+	return directory # because Torchtext loads vectors by the directory
