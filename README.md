@@ -91,3 +91,27 @@ then test it
 ```python
 print(SRC.vocab.vectors.shape)
 ```
+
+## Benchmark the word embeddings
+To see how good your word vectors are, e.g., similarity of vectors on similar words, we suggest that you take a look at this [repository](https://github.com/kudkudak/word-embeddings-benchmarks). It uses a number of datasets to verify how good, in a certain sense, a set of word vectors are. In short, higher (close to 1) Spearman correlation of scores on a dataset indicates better behavior of word embeddings. For example, 300-D GloVe has around 0.74 on 'MEN' dataset, and 0.52 on 'WS353'. Your pretrained embeddings, if trained on a much smaller corpus, will likely have a lower score than that of GloVe, even if it is properly pretrained. Here's the usage. Note that this 'Word Embeddings Benchmarks' ([web](https://github.com/kudkudak/word-embeddings-benchmarks)) repository has not been updated from 2018 to April 2021. Thus, some small changes (don't panic, not to the library) are expected. Suppose you are using Jupyter notebook (if command line is used, the change would be even easier).
+```python
+!git clone https://github.com/kudkudak/word-embeddings-benchmarks.git > /dev/null
+%cd word-embeddings-benchmarks
+with open('requirements.txt', 'r') as f:
+    requirements = f.read().replace('==0.19', '')
+with open('requirements.txt', 'w') as f:
+    f.write(requirements)
+!python setup.py install > /dev/null
+!pip install -r requirements.txt > /dev/null
+%cd -
+```
+The script above solves the package version issue. Then all that you need is:
+```python
+from benchmark import benchmark
+scores = benchmark(emb_name, size = 4)
+
+for (key, value) in scores.items():
+    print("Spearman correlation of scores on {} {}".format(key, value))
+```
+
+Of course, this ```benchmark``` function could be used independently, as long as your vectors are saved in a proper ```txt``` format.
