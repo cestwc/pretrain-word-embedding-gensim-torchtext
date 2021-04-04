@@ -87,7 +87,7 @@ TRG.build_vocab(train_data,
                  unk_init = torch.Tensor.normal_)
 ```
 
-test it
+then test it
 ```python
 print(SRC.vocab.vectors.shape)
 ```
