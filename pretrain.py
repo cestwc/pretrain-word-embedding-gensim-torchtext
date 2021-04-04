@@ -1,7 +1,7 @@
 import re
 import json
 import spacy
-from gensim.models import FastText
+from gensim.models import FastText, Word2Vec
 
 def loadData(fileName, fields):
 	
