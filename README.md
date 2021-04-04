@@ -10,8 +10,8 @@ You may also want to load a pretrained word embedding in the way it is done [her
 ```python
 from gensim.models import FastText
 
-common_texts = [['human', 'interface', 'computer'], [human beings]] # a list of tokenized sentences
-model = FastText(vector_size=4, window=3, min_count=1, sentences=common_texts, epochs=10)
+common_texts = [['human', 'interface', 'computer'], ['human',  'beings']] # a list of tokenized sentences
+model = FastText(size=4, window=3, min_count=1, sentences=common_texts, iter=10) # keyword 'iter' may be 'epochs, 'size' may be 'vector_size', depending on versions
 ```
 
 Here, we just use this API and feed it with our dataset that is not yet in the form of "a list of tokenized sentences", but one (or more) ```json``` file(s), instead. These ```json``` files are exactly the ones you use for your model learning with PyTorch / Torchtext.
