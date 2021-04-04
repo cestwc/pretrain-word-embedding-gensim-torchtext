@@ -16,4 +16,4 @@ model = FastText(size=4, window=3, min_count=1, sentences=common_texts, iter=10)
 
 Here, we just use this API and feed it with our dataset that is not yet in the form of "a list of tokenized sentences", but one (or more) ```json``` file(s), instead. These ```json``` files are exactly the ones you use for your model learning with PyTorch / Torchtext.
 
-Since you certainly don't want to pretrain your embeddings every time you run the entire code, a better compromise would be saving the vectors as ```.txt``` and load it later in Torchtext.
+Since you certainly don't want to pretrain your embeddings every time you run the entire code, a better compromise would be saving the vectors as ```.txt``` and load it later in Torchtext. Note that this helper function directly pretrains word vectors using your ```json``` dataset, so will ***NOT*** get entangled with your models.
