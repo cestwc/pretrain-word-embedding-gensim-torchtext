@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import spacy
@@ -36,6 +37,9 @@ def trim(tokens, trim_length):
 
 def wv(*datasets, directory = 'emb.txt', clean_text = False, tokenizer = None, trim_length = None, algo = 'fasttext', size = 128, window = 3, min_count = 2, workers = 4, sg = 1, iter = 1500):
 	
+	if os.path.exists(directory):
+		return directory # because Torchtext loads vectors by the directory
+
 	data = []
 	for (fileName, fields) in datasets:
 		data += loadData(fileName, fields)
